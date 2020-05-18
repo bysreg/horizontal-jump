@@ -3,6 +3,10 @@
 	"displayName": "Horizontal Jump",
 	"description": "Jumps to character after the next whitespace in the line.",
 	"publisher": "hibe",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bysreg/horizontal-jump"
+	},
 	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.45.0"
