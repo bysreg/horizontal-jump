@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "https://github.com/bysreg/horizontal-jump"
 	},
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
@@ -16,7 +16,9 @@
 	],
 	"activationEvents": [
 		"onCommand:hjump.jumpRight",
-		"onCommand:hjump.jumpLeft"
+		"onCommand:hjump.jumpLeft",
+		"onCommand:hjump.selectRight",
+		"onCommand:hjump.selectLeft"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -28,6 +30,14 @@
 			{
 				"command": "hjump.jumpLeft",
 				"title": "Horizontal Jump: Jump Left"
+			},
+			{
+				"command": "hjump.selectRight",
+				"title": "Horizontal Jump: Select Right"
+			},
+			{
+				"command": "hjump.selectLeft",
+				"title": "Horizontal Jump: Select Left"
 			}
 		]
 	},

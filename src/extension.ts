@@ -21,9 +21,9 @@ function findNextCharAfterSpace(line: vscode.TextLine, start: vscode.Position, n
 	return start.character; // should be unreachable
 }
 
-function markSelection(editor: vscode.TextEditor, next_line: number, next_char: number) {
-	const active = editor.selection.active.with(next_line, next_char);
-	editor.selection = new vscode.Selection(active, active);
+function markSelection(editor: vscode.TextEditor, next_char: number, anchor?: vscode.Position) {
+	const active = editor.selection.active.with(editor.selection.active.line, next_char);
+	editor.selection = new vscode.Selection(anchor || active, active);
 	editor.revealRange(new vscode.Range(active, active));
 }
 
@@ -35,15 +35,30 @@ export function activate(context: vscode.ExtensionContext) {
 		const editor = vscode.window.activeTextEditor;
 		if (editor === undefined) { return; }
 		var next_char = findNextCharAfterSpace(editor.document.lineAt(editor.selection.active.line), editor.selection.active, true);
-		markSelection(editor, editor.selection.active.line, next_char);
+		markSelection(editor, next_char);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("hjump.jumpLeft", () => {
 		const editor = vscode.window.activeTextEditor;
 		if (editor === undefined) { return; }
 		var next_char = findNextCharAfterSpace(editor.document.lineAt(editor.selection.active.line), editor.selection.active, false);
-		markSelection(editor, editor.selection.active.line, next_char);
+		markSelection(editor, next_char);
 	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand("hjump.selectRight", () => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor === undefined) { return; }
+		var next_char = findNextCharAfterSpace(editor.document.lineAt(editor.selection.active.line), editor.selection.active, true);
+		markSelection(editor, next_char, editor.selection.anchor);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand("hjump.selectLeft", () => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor === undefined) { return; }
+		var next_char = findNextCharAfterSpace(editor.document.lineAt(editor.selection.active.line), editor.selection.active, false);
+		markSelection(editor, next_char, editor.selection.anchor);
+	}));
+		
 }
 
 // this method is called when your extension is deactivated
