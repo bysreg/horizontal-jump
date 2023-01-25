@@ -2,7 +2,7 @@
 
 `Horizontal Jump: Jump Right` to move cursor position to the character after the next whitepace in the line.
 
-`Horizontal Jump: Jump Left` to move cursor position to the character before the next whitepace in the line.
+`Horizontal Jump: Jump Left` to move cursor position to the character before the previous whitepace in the line.
 
 ## Features
 
